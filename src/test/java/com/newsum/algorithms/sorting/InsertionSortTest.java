@@ -1,4 +1,4 @@
-package com.newsum.sorting;
+package com.newsum.algorithms.sorting;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
