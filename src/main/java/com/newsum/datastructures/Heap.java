@@ -16,6 +16,10 @@ public class Heap {
      return size == 0;
  }
 
+ public int getChild(int index, boolean left){
+    return 2 * index + (left ? 1 : 2);
+ }
+
  public void insert(int value){
      if (isFull()){
          throw new IndexOutOfBoundsException("Heap is full");
