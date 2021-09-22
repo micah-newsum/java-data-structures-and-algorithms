@@ -12,6 +12,13 @@ public class Heap {
      return size == heap.length;
  }
 
+ public int peek(){
+     if (isEmpty()){
+         throw new IndexOutOfBoundsException("Heap is empty.");
+     }
+     return heap[0];
+ }
+
  public boolean isEmpty(){
      return size == 0;
  }
