@@ -3,6 +3,12 @@ package com.newsum.algorithms.linkedlists;
 import com.newsum.datastructures.LinkedListNode;
 
 public class Partition {
+    /**
+     * Partitions a linked list such all values less than x, appear before x.
+     * @param node
+     * @param x
+     * @return
+     */
     public static LinkedListNode partition(LinkedListNode node, int x){
         LinkedListNode head = node;
         LinkedListNode tail = node;
