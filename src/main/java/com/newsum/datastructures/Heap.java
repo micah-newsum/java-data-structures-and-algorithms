@@ -37,6 +37,25 @@ public class Heap {
          size++;
      }
 
+    /**
+     * Compares value at index with parent node's
+     * up the tree until a parent node value is found that
+     * is greater.
+     * @param index
+     */
+    private void fixHeapAbove(int index){
+        int newValue = heap[index];
+        while (index > 0 && newValue > heap[getParent(index)]){ // 0 index is root
+            heap[index] = heap[getParent(index)];
+            index = getParent(index);
+        }
+        heap[index] = newValue;
+    }
+
+    public int getParent(int index){
+        return (index - 1) / 2;
+    }
+
      public int delete(int index){
          if (isEmpty()){
              throw new IndexOutOfBoundsException("Heap is empty.");
@@ -85,18 +104,5 @@ public class Heap {
             }
 
         }
-     }
-
-     private void fixHeapAbove(int index){
-         int newValue = heap[index];
-         while (index > 0 && newValue > heap[getParent(index)]){ // 0 index is root
-            heap[index] = heap[getParent(index)];
-            index = getParent(index);
-         }
-         heap[index] = newValue;
-     }
-
-     public int getParent(int index){
-         return (index - 1) / 2;
      }
 }
