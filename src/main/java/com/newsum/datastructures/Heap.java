@@ -1,109 +1,110 @@
 package com.newsum.datastructures;
 
 public class Heap {
-     private int[] heap;
-     private int size;
+    private int[] heap;
+    private int size;
 
-     public Heap(int capacity){
-         heap = new int[capacity];
-     }
+    public Heap(int capacity) {
+        heap = new int[capacity];
+    }
 
-     public boolean isFull(){
-         return size == heap.length;
-     }
+    public boolean isFull() {
+        return size == heap.length;
+    }
 
-     public int peek(){
-         if (isEmpty()){
-             throw new IndexOutOfBoundsException("Heap is empty.");
-         }
-         return heap[0];
-     }
+    public int peek() {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Heap is empty.");
+        }
+        return heap[0];
+    }
 
-     public boolean isEmpty(){
-         return size == 0;
-     }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-     public int getLeftChild(int index){
-         return getChild(index, true);
-     }
+    public int getLeftChild(int index) {
+        return getChild(index, true);
+    }
 
-     public int getRightChild(int index){
-         return getChild(index, false);
-     }
+    public int getRightChild(int index) {
+        return getChild(index, false);
+    }
 
-     private int getChild(int index, boolean left){
+    private int getChild(int index, boolean left) {
         return 2 * index + (left ? 1 : 2);
-     }
+    }
 
-     public void insert(int value){
-         if (isFull()){
-             throw new IndexOutOfBoundsException("Heap is full");
-         }
+    public void insert(int value) {
+        if (isFull()) {
+            throw new IndexOutOfBoundsException("Heap is full");
+        }
 
-         heap[size] = value;
-         fixHeapAbove(size);
-         size++;
-     }
+        heap[size] = value;
+        fixHeapAbove(size);
+        size++;
+    }
 
     /**
      * Compares value at index with parent node's
      * up the tree until a parent node value is found that
      * is greater.
+     *
      * @param index
      */
-    private void fixHeapAbove(int index){
+    private void fixHeapAbove(int index) {
         int newValue = heap[index];
-        while (index > 0 && newValue > heap[getParent(index)]){ // 0 index is root
+        while (index > 0 && newValue > heap[getParent(index)]) { // 0 index is root
             heap[index] = heap[getParent(index)];
             index = getParent(index);
         }
         heap[index] = newValue;
     }
 
-    public int getParent(int index){
+    public int getParent(int index) {
         return (index - 1) / 2;
     }
 
-     public int delete(int index){
-         if (isEmpty()){
-             throw new IndexOutOfBoundsException("Heap is empty.");
-         }
+    public int delete(int index) {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Heap is empty.");
+        }
 
-         int parent = getParent(index);
-         int deletedValue = heap[index];
+        int parent = getParent(index);
+        int deletedValue = heap[index];
 
-         // replace node with rightmost node
-         heap[index] = heap[size - 1];
+        // replace node with rightmost node
+        heap[index] = heap[size - 1];
 
-         if (index == 0 || heap[index] < heap[parent]){
-             fixHeapBelow(index, size - 1);
-         } else{
-             fixHeapAbove(index);
-         }
+        if (index == 0 || heap[index] < heap[parent]) {
+            fixHeapBelow(index, size - 1);
+        } else {
+            fixHeapAbove(index);
+        }
 
-         size--;
+        size--;
 
-         return deletedValue;
-     }
+        return deletedValue;
+    }
 
-     private void fixHeapBelow(int index, int lastHeapIndex){
+    private void fixHeapBelow(int index, int lastHeapIndex) {
         int childToSwap;
 
         while (index <= lastHeapIndex) {
             int leftChild = getLeftChild(index);
             int rightChild = getRightChild(index);
-            if (leftChild <= lastHeapIndex){
-                if (rightChild > lastHeapIndex){
+            if (leftChild <= lastHeapIndex) {
+                if (rightChild > lastHeapIndex) {
                     childToSwap = leftChild;
                 } else {
                     childToSwap = (heap[leftChild] > heap[rightChild] ? leftChild : rightChild);
                 }
 
-                if (heap[index] < heap[childToSwap]){
+                if (heap[index] < heap[childToSwap]) {
                     int temp = heap[index];
                     heap[index] = heap[childToSwap];
                     heap[childToSwap] = temp;
-                } else{
+                } else {
                     break;
                 }
                 index = childToSwap;
@@ -112,5 +113,5 @@ public class Heap {
             }
 
         }
-     }
+    }
 }
