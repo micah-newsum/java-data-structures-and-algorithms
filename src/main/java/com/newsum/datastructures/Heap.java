@@ -23,7 +23,15 @@ public class Heap {
          return size == 0;
      }
 
-     public int getChild(int index, boolean left){
+     public int getLeftChild(int index){
+         return getChild(index, true);
+     }
+
+     public int getRightChild(int index){
+         return getChild(index, false);
+     }
+
+     private int getChild(int index, boolean left){
         return 2 * index + (left ? 1 : 2);
      }
 
@@ -82,8 +90,8 @@ public class Heap {
         int childToSwap;
 
         while (index <= lastHeapIndex) {
-            int leftChild = getChild(index, true);
-            int rightChild = getChild(index, false);
+            int leftChild = getLeftChild(index);
+            int rightChild = getRightChild(index);
             if (leftChild <= lastHeapIndex){
                 if (rightChild > lastHeapIndex){
                     childToSwap = leftChild;
