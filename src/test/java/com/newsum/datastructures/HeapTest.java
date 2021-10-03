@@ -26,4 +26,11 @@ public class HeapTest {
         heap.insert(67);
         assertThat(heap.delete(5)).isEqualTo(40);
     }
+
+    @Test
+    void whenPeekThenValueReturned(){
+        Heap heap = new Heap(10);
+        heap.insert(1);
+        assertThat(heap.peek()).isEqualTo(1);
+    }
 }
