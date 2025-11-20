@@ -1,24 +1,24 @@
 package com.newsum.datastructures;
 
-public class DoublyLinkedList {
-    public Node head;
-    public Node tail;
+public class DoublyLinkedList<T> {
+    private Node<T> head;
+    private Node<T> tail;
 
-    static class Node {
-        int value;
-        Node prev;
-        Node next;
+    static class Node<T> {
+        T value;
+        Node<T> prev;
+        Node<T> next;
     }
 
     public static void main(String[] args) {
-        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        Node node = new Node();
+        DoublyLinkedList<Integer> doublyLinkedList = new DoublyLinkedList<>();
+        Node<Integer> node = new Node<>();
         node.value = 1;
         doublyLinkedList.head = node;
-        node = new Node();
+        node = new Node<>();
         node.value = 2;
         doublyLinkedList.head.next = node;
-        node = new Node();
+        node = new Node<>();
         node.value = 3;
         doublyLinkedList.head.next.next = node;
 
@@ -26,14 +26,14 @@ public class DoublyLinkedList {
         sumList(doublyLinkedList.head);
     }
 
-    private static void printList(Node head) {
+    private static void printList(Node<Integer> head) {
         while (head != null) {
             System.out.println(head.value);
             head = head.next;
         }
     }
 
-    private static void sumList(Node head) {
+    private static void sumList(Node<Integer> head) {
         int sum = 0;
         while (head != null) {
             sum += head.value;
